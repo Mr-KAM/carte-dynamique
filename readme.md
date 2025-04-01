@@ -1,5 +1,6 @@
 # Application de Carte Dynamique
 
+![Carte Dynamique des Apprenants](output.png)
 ## Description
 Cette application offre une visualisation cartographique dynamique des données par région de la cote d'ivoire. Construite avec Streamlit et Python, elle permet aux utilisateurs d'importer des données et de les visualiser géographiquement.
 
