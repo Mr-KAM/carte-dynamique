@@ -14,7 +14,7 @@ def pick_folder():
         return ""
 
 
-def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, title=None, cmap='plasma',size=1):
+def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, title=None, cmap='plasma',size=2):
     """
     Crée une carte choroplèthe avec une échelle de couleurs continue et des étiquettes au centre des polygones.
 
@@ -37,7 +37,7 @@ def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, tit
         L'objet de figure créé
     """
     # Creation du graphique
-    fig, ax = plt.subplots(figsize=(20*size, 17*size))
+    fig, ax = plt.subplots(figsize=(10*size, 8.5*size))
     ax.grid(False)
     vmin = geodf[column_to_plot].min()
     vmax = geodf[column_to_plot].max()

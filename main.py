@@ -155,21 +155,20 @@ def map_visualization(session, regions):
     col1, col2 = st.columns(2)
 
     with col1:
-        map_type = st.selectbox(
-            "Type de Visualisation",
-            ["Plotly Choropleth", "Matplotlib Choropleth"],
-            index=0
-        )
-
+        map_type = "Matplotlib Choropleth"
+        map_title= st.text_input("Titre de la carte", "Carte des apprenants")
+        label_title=st.text_input("Titre de la légende","Légende")
     with col2:
         map_couleur = st.selectbox(
             "Palette de couleur",
             load_color_palettes(),
             index=0
         )
-        map_title= st.text_input("Titre de la carte", "Carte des apprenants")
-        label_title=st.text_input("Titre de la légende","Légende")
-        size=st.number_input("Niveau de zoom de la carte", min_value=1, max_value=10, value=1, step=1)
+
+        size=st.number_input("Niveau de zoom de la carte", min_value=1.0, max_value=10.0, value=2.0, step=0.1)
+        select_grid=st.selectbox(
+            "Afficher le cadre",
+            ["on", "off"])
     # Prepare data
     map_regions = regions.copy()
     # Merge data
@@ -188,7 +187,7 @@ def map_visualization(session, regions):
     color_labels = ['0', '0 - 77', '77 - 220', '220 - 334', '334 - 483', '483+']
     color_palette = ['#f7fcf5', '#e5f5e0', '#a1d99b', '#74c476', '#31a354', '#006d2c']
 
-    if map_type == "Plotly Choropleth":
+    if map_type == "Plotly choropleth":
         # Plotly Choropleth
         fig = px.choropleth(
             merged,
@@ -210,7 +209,7 @@ def map_visualization(session, regions):
                 'xanchor': 'center',
                 'yanchor': 'top'
             },
-            height=800
+            height=900
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -218,13 +217,14 @@ def map_visualization(session, regions):
         # Matplotlib Choropleth
 
         fig = plot_choropleth(merged, 'data', 'data_label', label_title=label_title, title=map_title,cmap=map_couleur,size=size)
+        plt.axis(select_grid)
         st.pyplot(plt)
-    if st.button("Sauver"):
+    if st.button("Enrégistrer image"):
+        # st.error("Une fenetre de dialogue est ouvert pour selectionner le dossier de destination.")
         folder=pick_folder()
         chemin=os.path.join(folder, f"{map_title}.png")
-        # Save the map as a PNG file
-        fig.savefig(chemin, dpi=400)
-        st.success(f"Carte enregistrée avec succès à l'emplacement : {chemin}")
+        fig.savefig(chemin, dpi=600)
+        st.success(f"Carte enregistrée avec succès à l'emplacement : {chemin}",icon="✅")
 
 # About page
 def about_page():
