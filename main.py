@@ -1,8 +1,10 @@
 import streamlit as st
+from streamlit_navigation_bar import st_navbar
 import geopandas as gpd
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 from mpl_toolkits.axisartist.axislines import Subplot
 from shapely.geometry import Polygon, MultiPolygon
 import plotly.express as px
@@ -11,7 +13,8 @@ from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 from fonction import *
-
+import tkinter as tk
+from tkinter import filedialog
 ###---------------------gestion de base de données --------------------
 # """
 # Ici nous allons gerer les bases de données avec sqlite et sqlalchemy comme orm
@@ -53,7 +56,7 @@ def load_shapefile():
 
 @st.cache_data
 def load_color_palettes():
-    """Chargeemnt des palettes de couleurs disponibles dans matplotlib
+    """Chargement des palettes de couleurs disponibles dans matplotlib
 
     Returns:
         _type_: retourne une liste de palettes de couleurs
@@ -84,16 +87,12 @@ def import_data(session):
 
             # Preview and confirmation
             st.write("Aperçu des données :")
-            st.dataframe(data)
+            edited_data=st.data_editor(data, num_rows="dynamic")
+            # st.dataframe(data)
 
             if st.button("Confirmer l'importation"):
                 with st.spinner("Enregistrement en cours..."):
-                    for _, row in data.iterrows():
-                        # existing = session.query(Donnee).filter_by(region=row['region']).first()
-                        # if existing:
-                        #     existing.data = row['data']
-                        # else:
-                        #     pass
+                    for _, row in edited_data.iterrows():
                         session.add(Donnee(region=row['region'], data=row['data'], variable=row['variable'], date=row['date']))
                     session.commit()
                     st.success("Données importées avec succès !")
@@ -102,6 +101,7 @@ def import_data(session):
             st.error(f"Erreur lors de l'importation : {e}")
 
 # ------------------------fin de la gestion des données------------------
+###----------------------- Tableau de bord --------------------------------
 def dashboard(session, regions):
     st.header("📊 Tableau de Bord")
 
@@ -123,7 +123,7 @@ def dashboard(session, regions):
     with col3:
         st.metric("Nombre Total de Régions", len(session.query(Donnee).all()))
 
-    # Bar chart of learners by region
+    # Bar chart
     data = pd.read_sql(session.query(Donnee).statement, session.bind)
 
     if not data.empty:
@@ -131,10 +131,12 @@ def dashboard(session, regions):
             data,
             x='region',
             y='data',
+            color="variable",
             title='Répartition des données par Région',
             labels={'region': 'Région', 'data': 'Quantité'}
         )
         st.plotly_chart(fig, use_container_width=True)
+        st.dataframe(data)
 
 
 
@@ -160,12 +162,14 @@ def map_visualization(session, regions):
         )
 
     with col2:
-        couleurs = st.selectbox(
+        map_couleur = st.selectbox(
             "Palette de couleur",
             load_color_palettes(),
             index=0
         )
-
+        map_title= st.text_input("Titre de la carte", "Carte des apprenants")
+        label_title=st.text_input("Titre de la légende","Légende")
+        size=st.number_input("Niveau de zoom de la carte", min_value=1, max_value=10, value=1, step=1)
     # Prepare data
     map_regions = regions.copy()
     # Merge data
@@ -176,7 +180,7 @@ def map_visualization(session, regions):
         how="left"
     ).fillna(0)
     merged["data_label"] = merged["Name"] + "\n" + merged["data"].astype(str)
-    st.dataframe(merged.head())
+
 
 
     # Custom color bins
@@ -200,47 +204,37 @@ def map_visualization(session, regions):
         fig.update_geos(fitbounds="locations", visible=False)
         fig.update_layout(
             title={
-                'text': "NOMBRE D'APPRENANTS POUR 100 000 HABITANTS",
+                'text': map_title,
                 'y':0.95,
                 'x':0.5,
                 'xanchor': 'center',
                 'yanchor': 'top'
             },
-            height=600
+            height=800
         )
         st.plotly_chart(fig, use_container_width=True)
 
     else:
         # Matplotlib Choropleth
 
-        # Create a custom color mapping
-        def custom_color_map(value):
-            if value == 0:
-                return color_palette[0]
-            elif value <= 77:
-                return color_palette[1]
-            elif value <= 220:
-                return color_palette[2]
-            elif value <= 334:
-                return color_palette[3]
-            elif value <= 483:
-                return color_palette[4]
-            else:
-                return color_palette[5]
-
-        fig = plot_choropleth(merged, 'data', 'data_label', label_title="Apprenants pour 100 000", title='Carte des apprenants',cmap=couleurs)
+        fig = plot_choropleth(merged, 'data', 'data_label', label_title=label_title, title=map_title,cmap=map_couleur,size=size)
         st.pyplot(plt)
-
+    if st.button("Sauver"):
+        folder=pick_folder()
+        chemin=os.path.join(folder, f"{map_title}.png")
+        # Save the map as a PNG file
+        fig.savefig(chemin, dpi=400)
+        st.success(f"Carte enregistrée avec succès à l'emplacement : {chemin}")
 
 # About page
 def about_page():
     st.header("ℹ️ À Propos de l'Application")
     st.markdown("""
-    ### Carte Dynamique des Apprenants
+    ### Carte Dynamique
 
     Cette application permet de :
-    - Importer et gérer des données d'apprenants par région
-    - Visualiser la répartition géographique des apprenants
+    - Importer et gérer des données par région
+    - Visualiser la répartition géographique
     - Effectuer des analyses simples sur les données
 
     **Fonctionnalités Clés :**
@@ -253,15 +247,11 @@ def about_page():
     """)
 # Main Streamlit Application
 def main():
-    st.set_page_config(
-        page_title="Carte Dynamique des Apprenants",
-        page_icon=":map:",
-        layout="wide"
-    )
-
+    st.set_page_config(page_title="Carte Dynamique des Apprenants",page_icon="🗺️",layout="wide")
+    # menu=st_navbar(["Tableau de Bord", "Importer des Données", "Visualisation Carte", "À Propos"])
     # Sidebar for Navigation
     menu = st.sidebar.radio(
-        "Navigation",
+        "⚙️Menu",
         ["Tableau de Bord", "Importer des Données", "Visualisation Carte", "À Propos"]
     )
 
