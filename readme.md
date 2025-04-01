@@ -1,6 +1,6 @@
 # Application de Carte Dynamique
 
-![Carte Dynamique des Apprenants](output.png)
+![Carte Dynamique des Apprenants](map.png)
 ## Description
 Cette application offre une visualisation cartographique dynamique des données par région de la cote d'ivoire. Construite avec Streamlit et Python, elle permet aux utilisateurs d'importer des données et de les visualiser géographiquement.
 
@@ -10,7 +10,22 @@ Cette application offre une visualisation cartographique dynamique des données 
 - Visualisation cartographique de la répartition des apprenants par région.
 - Palettes de couleurs personnalisables pour les visualisations.
 
+![tableau de bord](image.png)
+
 ## Installation
+
+Pour eviter les dépendances conflictuelles, il est recommandé d'utiliser un environnement virtuel. Voici comment procéder :
+
+```bash
+pip install pew
+pew new carto-env
+pew workon carto-env
+```
+
+Cette etape de creation d'un environnement virtuel n'est pas obligatoire, mais elle peut faciliter la gestion des dépendances.
+
+Vous pouvez après celà cloner le dépôt et installer les dépendances requises.
+
 1. Cloner le dépôt :
    ```bash
    git clone [https://github.com/Mr-KAM/carte-dynamique.git](https://github.com/Mr-KAM/carte-dynamique.git)
