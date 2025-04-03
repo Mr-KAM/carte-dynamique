@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -10,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
+  SidebarTrigger,
 } from "./sidebar";
 import {
   BarChart3,
@@ -56,8 +56,8 @@ export default function AppSidebar() {
                     <Earth className="size-4 border-red-500" />
                   </div>
                   <div className="flex flex-col gap-0.5 leading-none ml-2">
-                    <span className="font-semibold">Carte Dynamique 🇨🇮</span>
-                    <span className="text-xs">des indicateurs de l'EFTP</span>
+                    <span className="font-semibold">Carte Dynamique</span>
+                    <span className="text-xs">des données de l'EFTP 🇨🇮</span>
                   </div>
                 </div>
               </SidebarMenuButton>
@@ -97,6 +97,7 @@ export default function AppSidebar() {
           </SidebarMenu>
         </SidebarFooter>
       </Sidebar>
+      {/* <SidebarTrigger /> */}
     </SidebarProvider>
   );
 }
