@@ -1,3 +1,5 @@
+"use client";
+import Link from "next/link";
 import {
   Sidebar,
   SidebarContent,
@@ -19,31 +21,37 @@ import {
   HelpCircle,
   Settings,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   {
     id: "BarChart3",
     title: "Tableau de Bord",
     icon: BarChart3,
+    path: "/",
   },
   {
     id: "FileUp",
     title: "Importer des Données",
     icon: FileUp,
+    path: "/fichier",
   },
   {
     id: "Globe",
     title: "Visualisation Carte",
     icon: Globe,
+    path: "/map",
   },
   {
     id: "HelpCircle",
     title: "À Propos",
     icon: HelpCircle,
+    path: "/about",
   },
 ];
 
 export default function AppSidebar() {
+  const pathname = usePathname();
   return (
     <SidebarProvider>
       <Sidebar>
@@ -71,12 +79,18 @@ export default function AppSidebar() {
               <SidebarMenu className="mt-5">
                 {navItems.map((item) => (
                   <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton className="cursor-pointer">
-                      <div className="flex items-center gap-2">
-                        <item.icon className="mr-2 size-4" />
-                        <span>{item.title}</span>
-                      </div>
-                    </SidebarMenuButton>
+                    <Link href={item.path} passHref>
+                      <SidebarMenuButton
+                        className={`cursor-pointer ${
+                          pathname === item.path ? "bg-slate-100 font-bold" : ""
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <item.icon className="mr-2 size-4" />
+                          <span>{item.title}</span>
+                        </div>
+                      </SidebarMenuButton>
+                    </Link>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
