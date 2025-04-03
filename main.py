@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_navigation_bar import st_navbar
+from streamlit_shadcn_ui import button, card
 import geopandas as gpd
 import pandas as pd
 import numpy as np
@@ -10,7 +11,9 @@ from shapely.geometry import Polygon, MultiPolygon
 import plotly.express as px
 import plotly.graph_objs as go
 from sqlalchemy import create_engine, Column, Integer, String, Float
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from fastapi import FastAPI, File, UploadFile
 import os
 from fonction import *
 import tkinter as tk
@@ -145,7 +148,7 @@ def map_visualization(session, regions):
 
     # Retrieve data
     # db_data = pd.read_sql(session.query(Donnee).statement, session.bind)
-    data_path = "data\\csv\\data_model.csv"
+    data_path = "/Users/macbookair/Desktop/CartographieMETFPA/carte-dynamique/data/csv/data_model.csv"
     db_data = pd.read_csv(data_path)
     if db_data.empty:
         st.warning("Aucune donnée disponible. Veuillez importer des données.")
@@ -250,7 +253,7 @@ def main():
     st.set_page_config(page_title="Carte Dynamique des Apprenants",page_icon="🗺️",layout="wide")
     # menu=st_navbar(["Tableau de Bord", "Importer des Données", "Visualisation Carte", "À Propos"])
     # Sidebar for Navigation
-    menu = st.sidebar.radio(
+    menu = st.sidebar.selectbox(
         "⚙️Menu",
         ["Tableau de Bord", "Importer des Données", "Visualisation Carte", "À Propos"]
     )
