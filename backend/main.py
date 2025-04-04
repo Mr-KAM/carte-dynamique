@@ -13,7 +13,6 @@ import plotly.graph_objs as go
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from fastapi import FastAPI, File, UploadFile
 import os
 from fonction import *
 import tkinter as tk
