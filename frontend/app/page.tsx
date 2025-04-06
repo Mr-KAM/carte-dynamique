@@ -1,5 +1,5 @@
-import AppSidebar from "@/components/ui/AppSidebar";
+import AppSidebar from "@/components/navab/Sidebar";
 
-export default function page() {
+export default function Home() {
   return <div>Dashboard</div>;
 }

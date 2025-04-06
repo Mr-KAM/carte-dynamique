@@ -1,18 +1,21 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+"use client";
 
-export default function Import() {
+import { CsvImporter } from "../../components/CVSimporter";
+import { useState } from "react";
+
+export default function Page() {
+  const [csvData, setCsvData] = useState<CSVData[] | null>(null);
+
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Importer des Données</h1>
-      <div className="flex flex-col items-start max-w-md bg-card p-6 rounded-lg border shadow-sm">
-        <Label htmlFor="file">Importer un fichier CSV</Label>
-        <div className="flex gap-2 mt-3">
-          <Input id="file" type="file" accept=".csv" />
-          <Button className="cursor-pointer">Importer</Button>
-        </div>
-      </div>
+    <div className="p-4">
+      <h1 className="text-xl font-bold mb-4">Importation de CSV</h1>
+      <CsvImporter onDataParsed={setCsvData} />
+      {/* Optionnel : preview des données importées */}
+      {csvData && (
+        <pre className="mt-4 bg-gray-100 p-2 rounded">
+          {JSON.stringify(csvData, null, 2)}
+        </pre>
+      )}
     </div>
   );
 }
