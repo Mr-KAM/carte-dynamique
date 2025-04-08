@@ -32,7 +32,7 @@ const navItems = [
     id: "FileUp",
     title: "Importer des Données",
     icon: FileUp,
-    path: "/fichier",
+    path: "/importer",
   },
   {
     id: "Globe",
@@ -59,7 +59,8 @@ export default function AppSidebar() {
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarHeader>
+        {/* TODO: Ajouter un lien qui mène vers la page d'accueil en cliquant sur le logo*/}
+        <SidebarHeader className="cursor-pointer">
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" asChild>
@@ -69,6 +70,7 @@ export default function AppSidebar() {
                   </div>
                   <div className="flex flex-col gap-0.5 leading-none ml-2">
                     <span className="font-semibold">StatViz CI 🇨🇮</span>
+                    {/* TODO: Rendre le nom dynamique en fonction du ministère sélectionnée*/}
                     <span className="text-xs font-medium text-muted-foreground">
                       METFPA
                     </span>
