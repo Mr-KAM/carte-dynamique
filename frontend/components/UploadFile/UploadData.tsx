@@ -1,5 +1,4 @@
 "use client";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,18 +9,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useCSVUploader from "@/hooks/useCSVUploader";
-
-import { AlertCircle, CheckCircle2, Globe, Table, Upload } from "lucide-react";
+import { Globe, Upload } from "lucide-react";
 import CustomAlert from "./CustomAlert";
+import VisualizFirstRow from "./VisualizFirstRow";
 
-export default function ImportData() {
+export default function UploadData() {
   const { csvData, fileError, fileSuccess, fileInputRef, handleFileUpload } =
     useCSVUploader();
 
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
-  console.log("Contenu du CSV :", csvData);
 
   return (
     <Card>
@@ -55,8 +53,10 @@ export default function ImportData() {
             </Button>
           </div>
         </div>
-        <CustomAlert />
+        <CustomAlert {...{ fileError, fileSuccess }} />
+        <VisualizFirstRow data={csvData} />
       </CardContent>
+
       <CardFooter className="flex justify-end gap-2">
         <Button variant="orange" disabled={!csvData}>
           <Globe className="mr-2 h-4 w-4" />

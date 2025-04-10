@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 
-interface CSVData {
+export interface CSVData {
   region: string;
   variable: string;
   date: string;
@@ -9,7 +9,7 @@ interface CSVData {
   [key: string]: string | number;
 }
 
-export default function UseCsvUploader() {
+export default function useCSVUploader() {
   const [csvData, setCsvData] = useState<CSVData[] | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
   const [fileSuccess, setFileSuccess] = useState<string | null>(null);

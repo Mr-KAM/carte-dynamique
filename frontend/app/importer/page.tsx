@@ -1,9 +1,9 @@
-import ImportData from "@/components/UploadFile/UploadData";
+import UploadData from "@/components/UploadFile/UploadData";
 
 export default function page() {
   return (
     <div className="w-full p-10">
-      <ImportData />
+      <UploadData />
     </div>
   );
 }
