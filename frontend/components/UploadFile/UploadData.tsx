@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import useCSVUploader from "@/hooks/useCSVUploader";
-import { Globe, Upload } from "lucide-react";
+import { FileUp, Globe } from "lucide-react";
 import CustomAlert from "./CustomAlert";
 import VisualizFirstRow from "./VisualizFirstRow";
 import Link from "next/link";
@@ -43,7 +43,7 @@ export default function UploadData() {
             onChange={handleFileUpload}
           />
           <div className="flex flex-col items-center gap-2 text-center p-4">
-            <Upload className="h-10 w-10 text-muted-foreground" />
+            <FileUp className="h-10 w-10 text-muted-foreground" />
             <h3 className="text-lg font-medium">Importer un fichier CSV</h3>
             <p className="text-sm text-muted-foreground">
               Le fichier doit contenir les colonnes &apos;region&apos;, &
