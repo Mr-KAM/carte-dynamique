@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Polygon, MultiPolygon
+from io import BytesIO
 
 def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, title=None, cmap='viridis',size=2):
     """
@@ -66,5 +67,8 @@ def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, tit
     # Set title and adjust layout
     plt.title(title or f'Choropleth Map of {column_to_plot}',fontsize=25)
     plt.tight_layout()
-
-    return fig
+    
+    img_bytes = BytesIO()
+    plt.savefig(img_bytes, format='png')
+    img_bytes.seek(0)
+    return img_bytes
