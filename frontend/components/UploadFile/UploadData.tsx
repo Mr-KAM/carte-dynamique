@@ -59,6 +59,7 @@ export default function UploadData() {
       </CardContent>
 
       <CardFooter className="flex justify-end gap-2">
+        {/* TODO: Permettre de cliquer sur le bouton uniquement quand le csv est chargée */}
         <Link href={"/map"}>
           <Button variant="orange" disabled={!csvData}>
             <Globe className="mr-2 h-4 w-4" />
