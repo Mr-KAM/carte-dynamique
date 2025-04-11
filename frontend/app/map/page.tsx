@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ArrowDownToLine } from "lucide-react";
 
 export default function Map() {
   return (
@@ -7,7 +8,11 @@ export default function Map() {
       <div className="h-10/12 bg-muted/50 rounded-lg border flex items-center justify-center">
         Carte des indicateurs
       </div>
-      <Button className="mt-6 cursor-pointer">Enregistrer image</Button>
+      
+      <Button variant={"orange"} className="mt-6 cursor-pointer">
+        <ArrowDownToLine />
+        Enregistrer image
+      </Button>
     </div>
   );
 }

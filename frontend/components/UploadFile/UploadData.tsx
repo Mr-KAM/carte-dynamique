@@ -12,6 +12,7 @@ import useCSVUploader from "@/hooks/useCSVUploader";
 import { Globe, Upload } from "lucide-react";
 import CustomAlert from "./CustomAlert";
 import VisualizFirstRow from "./VisualizFirstRow";
+import Link from "next/link";
 
 export default function UploadData() {
   const { csvData, fileError, fileSuccess, fileInputRef, handleFileUpload } =
@@ -58,10 +59,12 @@ export default function UploadData() {
       </CardContent>
 
       <CardFooter className="flex justify-end gap-2">
-        <Button variant="orange" disabled={!csvData}>
-          <Globe className="mr-2 h-4 w-4" />
-          Visualiser sur la carte
-        </Button>
+        <Link href={"/map"}>
+          <Button variant="orange" disabled={!csvData}>
+            <Globe className="mr-2 h-4 w-4" />
+            Visualiser sur la carte
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

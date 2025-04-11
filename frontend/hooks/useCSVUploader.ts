@@ -1,25 +1,19 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-
-export interface CSVData {
-  region: string;
-  variable: string;
-  date: string;
-  Num: string;
-  data: string | number;
-  [key: string]: string | number;
-}
+import { useCSVStore } from "@/app/store/useCSVStore";
+import { ChangeEvent, useRef, useState } from "react";
+import { CSVFile } from "@/app/store/useCSVStore";
 
 export default function useCSVUploader() {
-  const [csvData, setCsvData] = useState<CSVData[] | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
   const [fileSuccess, setFileSuccess] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { csvData, setCSVData, resetCSVData } = useCSVStore();
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setFileError(null);
     setFileSuccess(null);
-    setCsvData(null);
+    resetCSVData();
 
     if (!file) return;
 
@@ -53,7 +47,7 @@ export default function useCSVUploader() {
         }
 
         // Parser les données
-        const parsedData: CSVData[] = [];
+        const parsedData: CSVFile[] = [];
         for (let i = 1; i < lines.length; i++) {
           if (lines[i].trim() === "") continue;
 
@@ -65,7 +59,7 @@ export default function useCSVUploader() {
             return;
           }
 
-          const row: CSVData = {
+          const row: CSVFile = {
             region: "",
             variable: "",
             data: "",
@@ -82,7 +76,7 @@ export default function useCSVUploader() {
           parsedData.push(row);
         }
 
-        setCsvData(parsedData);
+        setCSVData(parsedData);
         setFileSuccess(
           `Fichier importé avec succès: ${parsedData.length} lignes de données`
         );

@@ -8,9 +8,9 @@ import {
   TableRow,
 } from "../ui/table";
 
-import { CSVData } from "@/hooks/useCSVUploader";
+import { CSVFile } from "@/app/store/useCSVStore";
 
-export default function VisualizFirstRow({ data }: { data: CSVData[] | null }) {
+export default function VisualizFirstRow({ data }: { data: CSVFile[] | null }) {
   console.log("Contenu du data :", data);
 
   return (

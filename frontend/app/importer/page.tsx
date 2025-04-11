@@ -1,4 +1,4 @@
-import UploadData from "@/components/UploadFile/UploadData";
+import UploadData from "@/components/uploadFile/UploadData";
 
 export default function page() {
   return (
