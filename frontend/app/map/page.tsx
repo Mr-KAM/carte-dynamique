@@ -11,7 +11,7 @@ export default function Map() {
     <div className="p-6 w-full">
       <h1 className="text-2xl font-bold mb-6">Visualisation Carte</h1>
       {csvData ? (
-        <div className="h-auto bg-muted/50 rounded-lg border flex items-center justify-center">
+        <div className="h-max bg-muted/50 rounded-lg border flex items-center justify-center">
           <MapViz />
         </div>
       ) : (

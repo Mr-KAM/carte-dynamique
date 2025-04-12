@@ -31,5 +31,5 @@ async def generate_map():
                                 column_to_plot="data", 
                                 label_column="Name", 
                                 title='Carte des régions selon la donnée',
-                                cmap='viridis')
+                                cmap='GnBu_r')
     return StreamingResponse(img_bytes, media_type="image/png")

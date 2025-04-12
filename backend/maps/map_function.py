@@ -5,7 +5,7 @@ import geopandas as gpd
 from shapely.geometry import Polygon, MultiPolygon
 from io import BytesIO
 
-def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, title=None, cmap='viridis',size=2):
+def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, title=None, cmap='GnBu_r',size=1.8):
     """
     Crée une carte choroplèthe avec une échelle de couleurs continue et des étiquettes au centre des polygones.
 
@@ -52,7 +52,7 @@ def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, tit
             ax.text(centroid.x, 
                     centroid.y, 
                     f"{row[label_column]}\n{row[column_to_plot]:,.0f}",
-                    fontsize=10, 
+                    fontsize=10,
                     ha='center', 
                     va='center', 
                     color='#0f172a'
