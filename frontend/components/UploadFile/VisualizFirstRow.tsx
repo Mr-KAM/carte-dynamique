@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "../ui/table";
 
-import { CSVFile } from "@/app/store/useCSVStore";
+import { CSVFile } from "@/store/useCSVStore";
 
 export default function VisualizFirstRow({ data }: { data: CSVFile[] | null }) {
   console.log("Contenu du data :", data);

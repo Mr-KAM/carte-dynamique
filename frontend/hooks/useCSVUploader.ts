@@ -1,6 +1,6 @@
-import { useCSVStore } from "@/app/store/useCSVStore";
+import { useCSVStore } from "@/store/useCSVStore";
 import { ChangeEvent, useRef, useState } from "react";
-import { CSVFile } from "@/app/store/useCSVStore";
+import { CSVFile } from "@/store/useCSVStore";
 
 export default function useCSVUploader() {
   const [fileError, setFileError] = useState<string | null>(null);

@@ -6,7 +6,6 @@ import { ArrowDownToLine } from "lucide-react";
 
 export default function Map() {
   const { csvData } = useCSVUploader();
-  const test = true;
   return (
     <div className="p-6 w-full">
       <h1 className="text-2xl font-bold mb-6">Visualisation Carte</h1>

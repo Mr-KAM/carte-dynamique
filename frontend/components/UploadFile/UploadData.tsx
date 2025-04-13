@@ -13,6 +13,7 @@ import { FileUp, Globe } from "lucide-react";
 import CustomAlert from "./CustomAlert";
 import VisualizFirstRow from "./VisualizFirstRow";
 import Link from "next/link";
+import convertToCSVText from "@/utils/convertToCSVText";
 
 export default function UploadData() {
   const { csvData, fileError, fileSuccess, fileInputRef, handleFileUpload } =
@@ -20,6 +21,29 @@ export default function UploadData() {
 
   const triggerFileInput = () => {
     fileInputRef.current?.click();
+  };
+
+  const handlePostCSV = async () => {
+    if (!csvData) return;
+
+    const csvText = convertToCSVText(csvData);
+    const blob = new Blob([csvText], { type: "text/csv" });
+    const formatData = new FormData();
+    formatData.append("file", blob, "data.csv");
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/upload-csv", {
+        method: "POST",
+        body: formatData,
+      });
+      if (!res.ok) throw Error("Erreur lors de l'envoi du fichier");
+
+      const imageBlob = await res.blob();
+      const imageUrl = URL.createObjectURL(imageBlob);
+      console.log("Image reçue à afficher:", imageUrl);
+    } catch (error) {
+      console.error("Erreur l'ors de l'envoi", error);
+    }
   };
 
   return (
@@ -61,7 +85,7 @@ export default function UploadData() {
       <CardFooter className="flex justify-end gap-2">
         {/* TODO: Permettre de cliquer sur le bouton uniquement quand le csv est chargée */}
         <Link href={"/map"}>
-          <Button variant="orange" disabled={!csvData}>
+          <Button variant="orange" disabled={!csvData} onClick={handlePostCSV}>
             <Globe className="mr-2 h-4 w-4" />
             Visualiser sur la carte
           </Button>
