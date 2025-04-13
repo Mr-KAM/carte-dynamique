@@ -7,7 +7,7 @@ from io import BytesIO
 
 # todo : Réduire les marges autour de la maps
 # todo : Supprimer Disctrict Autonomme dans les deux régions
-def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, title=None, cmap='GnBu_r',size=1.8):
+def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, title=None, cmap='rainbow',size=1.8):
     """
     Crée une carte choroplèthe avec une échelle de couleurs continue et des étiquettes au centre des polygones.
 

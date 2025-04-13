@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
+import { useCustomMapStore } from "@/store/useCustomMapStore";
 
 export default function MapViz() {
   const [imageSrc, setImageSrc] = useState<string | undefined>(undefined);
 
+  const { title, selectedPalette, legend } = useCustomMapStore();
+
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/generate-map")
+    fetch(
+      `http://localhost:8000/generate-map?title=${encodeURIComponent(
+        title
+      )}&cmap=${selectedPalette}&label_title=${encodeURIComponent(legend)}`
+    )
       .then((res) => res.blob())
       .then((imageBlob: Blob) => {
         const imageObjectUrl = URL.createObjectURL(imageBlob);

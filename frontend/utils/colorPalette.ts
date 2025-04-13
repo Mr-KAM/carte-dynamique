@@ -1,4 +1,3 @@
-// 🎨 Fonction palette
 export const colorPalette: Record<string, string> = {
   viridis: "from-[#440154] via-[#21908C] to-[#FDE725]",
   plasma: "from-[#0D0887] via-[#D8576B] to-[#F0F921]",

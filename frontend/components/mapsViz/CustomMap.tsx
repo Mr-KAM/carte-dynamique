@@ -11,13 +11,21 @@ import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { colorPalette } from "@/utils/colorPalette";
+import { useCustomMapStore } from "@/store/useCustomMapStore";
 
 // 🎨 Fonction palette
 const getColorPalette = (name: string) =>
   colorPalette[name] ?? "from-gray-300 to-gray-600";
 
 export default function CustomMap() {
-  const [selectedPalette, setSelectedPalette] = useState("viridis");
+  const {
+    title,
+    selectedPalette,
+    legend,
+    setTitle,
+    setSelectedPalette,
+    setLegend,
+  } = useCustomMapStore();
 
   return (
     <Card>
@@ -32,7 +40,8 @@ export default function CustomMap() {
           <Input
             id="map-title"
             placeholder="Entrez le titre de la carte"
-            defaultValue="Carte des centres EFTP"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -68,7 +77,8 @@ export default function CustomMap() {
           <textarea
             id="map-legend"
             placeholder="Entrez la légende de la carte"
-            defaultValue={`● Centres de formation actifs\n● Centres en construction\n● Centres partenaires`}
+            value={legend}
+            onChange={(e) => setLegend(e.target.value)}
             className="min-h-[80px] w-full border rounded-md p-2 text-sm"
           />
         </div>
