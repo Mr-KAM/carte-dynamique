@@ -1,4 +1,5 @@
 "use client";
+import CustomMap from "@/components/mapsViz/CustomMap";
 import MapViz from "@/components/mapsViz/MapViz";
 import { Button } from "@/components/ui/button";
 import useCSVUploader from "@/hooks/useCSVUploader";
@@ -7,21 +8,26 @@ import { ArrowDownToLine } from "lucide-react";
 export default function Map() {
   const { csvData } = useCSVUploader();
   return (
-    <div className="p-6 w-full">
-      <h1 className="text-2xl font-bold mb-6">Visualisation Carte</h1>
-      {csvData ? (
-        <div className="h-max bg-muted/50 rounded-lg border flex items-center justify-center">
-          <MapViz />
-        </div>
-      ) : (
-        <span className="h-10/12 bg-muted/50 rounded-lg border flex items-center justify-center">
-          Carte des indicateurs
-        </span>
-      )}
-      <Button variant={"orange"} className="mt-6" disabled={!csvData}>
-        <ArrowDownToLine />
-        Enregistrer image
-      </Button>
-    </div>
+    <>
+      <div className="p-6 w-full h-full">
+        <h1 className="text-2xl font-bold mb-6">Visualisation Carte</h1>
+        {csvData ? (
+          <div>
+            <CustomMap />
+            <div className="mt-5 bg-muted/50 rounded-lg border flex items-center justify-center">
+              <MapViz />
+            </div>
+          </div>
+        ) : (
+          <span className="h-10/12 bg-muted/50 rounded-lg border flex items-center justify-center">
+            Carte des indicateurs
+          </span>
+        )}
+        <Button variant={"orange"} className="mt-6" disabled={!csvData}>
+          <ArrowDownToLine />
+          Enregistrer image
+        </Button>
+      </div>
+    </>
   );
 }

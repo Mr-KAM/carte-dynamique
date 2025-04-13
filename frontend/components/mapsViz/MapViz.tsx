@@ -16,12 +16,10 @@ export default function MapViz() {
   }, []);
 
   return (
-    <div>
-      <img
-        src={imageSrc}
-        alt="Carte"
-        className="max-w-full max-h-full object-contain"
-      />
-    </div>
+    <img
+      src={imageSrc}
+      alt="Carte"
+      className="max-w-full max-h-full object-contain"
+    />
   );
 }
