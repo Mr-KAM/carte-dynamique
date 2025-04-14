@@ -70,8 +70,8 @@ export default function UploadData() {
             <FileUp className="h-10 w-10 text-muted-foreground" />
             <h3 className="text-lg font-medium">Importer un fichier CSV</h3>
             <p className="text-sm text-muted-foreground">
-              Le fichier doit contenir les colonnes &apos;region&apos;, &
-              &apos;variable&apos; et &apos;date&apos;
+              Le fichier doit contenir seulement que les colonnes &apos;Regions&apos;et
+              &apos;Valeurs&apos;
             </p>
             <Button variant="outline" size="sm" className="mt-2">
               Parcourir les fichiers

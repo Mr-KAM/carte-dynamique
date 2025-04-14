@@ -1,12 +1,8 @@
 import { create } from "zustand";
 
 export interface CSVFile {
-  region: string;
-  variable: string;
-  date: string;
-  Num: string;
-  data: string | number;
-  [key: string]: string | number;
+  Regions: string;
+  Valeurs: number;
 }
 
 interface CSVState {
