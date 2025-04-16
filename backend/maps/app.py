@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import geopandas as gpd 
+import geopandas as gpd
 from map_function import plot_choropleth
 from fastapi import FastAPI, UploadFile, File, Query
 from fastapi.responses import StreamingResponse
@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 # shapeile_path = "./data_model.csv"
-shapefile_path = "/Users/macbookair/Desktop/CartographieMETFPA/carte-dynamique/backend/map with streamlit/data/shp/Limite des région 2018.shp"
+shapefile_path = "../map with streamlit/data/shp/Limite des région 2018.shp"
 
 gdf = gpd.read_file(shapefile_path)
 
@@ -39,9 +39,9 @@ async def generate_map( title: str = Query(""),
     global merged
     if merged is None:
         return {"error": "Aucune donnée CSV reçue. Veuillez d'abord uploader un fichier."}
-    img_bytes = plot_choropleth(merged, 
-                                column_to_plot="Valeurs", 
-                                label_column="Name", 
+    img_bytes = plot_choropleth(merged,
+                                column_to_plot="Valeurs",
+                                label_column="Name",
                                 title=title,
                                 label_title=label_title,
                                 cmap=cmap)
