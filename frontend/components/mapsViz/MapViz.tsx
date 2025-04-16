@@ -7,19 +7,26 @@ export default function MapViz() {
   const { title, selectedPalette, legend } = useCustomMapStore();
 
   useEffect(() => {
-    fetch(
-      `http://localhost:8000/generate-map?title=${encodeURIComponent(
-        title
-      )}&cmap=${selectedPalette}&label_title=${encodeURIComponent(legend)}`
-    )
-      .then((res) => res.blob())
-      .then((imageBlob: Blob) => {
-        const imageObjectUrl = URL.createObjectURL(imageBlob);
-        setImageSrc(imageObjectUrl);
-      })
-      .catch((error) =>
-        console.error("Erreur lors de la récupération d'image", error)
-      );
+    const MapImageStored = sessionStorage.getItem("mapImage");
+
+    if (MapImageStored) {
+      setImageSrc(MapImageStored);
+    } else {
+      fetch(
+        `http://localhost:8000/generate-map?title=${encodeURIComponent(
+          title
+        )}&cmap=${selectedPalette}&label_title=${encodeURIComponent(legend)}`
+      )
+        .then((res) => res.blob())
+        .then((imageBlob: Blob) => {
+          const imageObjectUrl = URL.createObjectURL(imageBlob);
+          setImageSrc(imageObjectUrl);
+          sessionStorage.setItem("mapImage", imageObjectUrl);
+        })
+        .catch((error) =>
+          console.error("Erreur lors de la récupération d'image", error)
+        );
+    }
   }, []);
 
   return (
