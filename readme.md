@@ -143,6 +143,7 @@ pip install -r requirements.txt
 
 Pour lancer le serveur d'API, assurez vous d'avoir accédé au dossier `maps` et utilisez la commande suivante :
 
+
 ```bash
 # Lancement du serveur d'API
 uvicorn app:app --reload
