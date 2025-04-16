@@ -82,15 +82,11 @@ cd frontend
 npm install
 # Lancez ensuite le serveur de développement du frontend
 npm run dev
-# ou
-yarn dev
-# ou
-pnpm dev
-# ou
-bun dev
+# ou yarn dev ou pnpm dev ou bun dev
+
 ```
 
-**NB:** Assurez vous d'avoir Node.js installé sur votre machine. Vous pouvez le télécharger [ici](https://nodejs.org/).
+**NB:** Assurez vous d'avoir Node.js installé sur votre machine et npm également. Vous pouvez le télécharger [ici](https://nodejs.org/).
 
 ### Utilisation
 Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le résultat.
