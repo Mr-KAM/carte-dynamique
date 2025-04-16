@@ -16,8 +16,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# shapeile_path = "./data_model.csv"
-shapefile_path = "../map with streamlit/data/shp/Limite des région 2018.shp"
+# csv = "./data/csv/data_model.csv"
+shapefile_path = "./data/shp/Limite des région 2018.geojson" # Chemin du fichier GeoJSON modifié
 
 gdf = gpd.read_file(shapefile_path)
 
