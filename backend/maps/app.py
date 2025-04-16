@@ -16,7 +16,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# csv_path = "./data_model.csv"
+# shapeile_path = "./data_model.csv"
 shapefile_path = "/Users/macbookair/Desktop/CartographieMETFPA/carte-dynamique/backend/map with streamlit/data/shp/Limite des région 2018.shp"
 
 gdf = gpd.read_file(shapefile_path)
@@ -28,19 +28,19 @@ merged = None
 def upload_csv(file: UploadFile=File(...)):
     df = pd.read_csv(file.file)
     global merged
-    merged = pd.merge(df, gdf, left_on='region', right_on='Name', how='inner')
+    merged = pd.merge(df, gdf, left_on='Regions', right_on='Name', how='inner')
     return {"message": "CSV reçu et fusionné avec succès ✅"}
 
 
 @app.get("/generate-map")
-async def generate_map( title: str = Query("Carte des régions selon la donnée"),
-                       cmap: str = Query("rainbow"),
-                       label_title: str = Query("Donnée")):
+async def generate_map( title: str = Query(""),
+                       cmap: str = Query(""),
+                       label_title: str = Query("")):
     global merged
     if merged is None:
         return {"error": "Aucune donnée CSV reçue. Veuillez d'abord uploader un fichier."}
     img_bytes = plot_choropleth(merged, 
-                                column_to_plot="data", 
+                                column_to_plot="Valeurs", 
                                 label_column="Name", 
                                 title=title,
                                 label_title=label_title,

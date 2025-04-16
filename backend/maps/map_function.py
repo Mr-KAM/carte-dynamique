@@ -67,7 +67,7 @@ def plot_choropleth(geodf, column_to_plot, label_column, label_title = None, tit
     cbar.set_label(label_title or column_to_plot)
 
     # Set title and adjust layout
-    plt.title(title or f'Choropleth Map of {column_to_plot}',fontsize=25)
+    plt.title(title,fontsize=20)
     plt.tight_layout()
     
     img_bytes = BytesIO()
