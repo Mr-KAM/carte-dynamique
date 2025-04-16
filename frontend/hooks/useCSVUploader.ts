@@ -1,7 +1,7 @@
 import { useCSVStore } from "@/store/useCSVStore";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Papa from "papaparse";
-import { CSVFile } from "@/store/useCSVStore"; 
+import { CSVFile } from "@/store/useCSVStore";
 
 export default function useCSVUploader() {
   const [fileError, setFileError] = useState<string | null>(null);
@@ -9,6 +9,21 @@ export default function useCSVUploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { csvData, setCSVData, resetCSVData } = useCSVStore();
+
+  useEffect(() => {
+    const savedCSV = sessionStorage.getItem("csvData");
+
+    if (savedCSV) {
+      try {
+        const parsed = JSON.parse(savedCSV);
+        if (Array.isArray(parsed)) {
+          setCSVData(parsed);
+        }
+      } catch (error) {
+        console.warn("Erreur de parsing sessionStorage", error);
+      }
+    }
+  }, [setCSVData]);
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
