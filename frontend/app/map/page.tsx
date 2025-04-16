@@ -7,6 +7,19 @@ import { ArrowDownToLine } from "lucide-react";
 
 export default function Map() {
   const { csvData } = useCSVUploader();
+
+  const handleSaveImage = () => {
+    const img = document.querySelector("img[alt='Carte']") as HTMLImageElement;
+    if (img && img.src.startsWith("data:image")) {
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.download = "map-image.png";
+      link.click();
+    } else {
+      alert("Aucune image de carte à enregistrer.");
+    }
+  };
+
   return (
     <>
       <div className="p-6 w-full h-full">
@@ -23,7 +36,12 @@ export default function Map() {
             Carte des indicateurs
           </span>
         )}
-        <Button variant={"orange"} className="mt-6" disabled={!csvData}>
+        <Button
+          variant={"orange"}
+          className="mt-6"
+          disabled={!csvData}
+          onClick={handleSaveImage}
+        >
           <ArrowDownToLine />
           Enregistrer image
         </Button>
