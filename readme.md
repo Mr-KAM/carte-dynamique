@@ -26,9 +26,12 @@ Cette etape de creation d'un environnement virtuel n'est pas obligatoire, mais e
 
 Vous pouvez après celà cloner le dépôt et installer les dépendances requises.
 
+
 1. Cloner le dépôt :
+
+[https://github.com/Mr-KAM/carte-dynamique.git](https://github.com/Mr-KAM/carte-dynamique.git)
    ```bash
-   git clone [https://github.com/Mr-KAM/carte-dynamique.git](https://github.com/Mr-KAM/carte-dynamique.git)
+   git clone https://github.com/Mr-KAM/carte-dynamique.git
    cd carte-dynamique
    ```
 2. Installer les paquets requis :
