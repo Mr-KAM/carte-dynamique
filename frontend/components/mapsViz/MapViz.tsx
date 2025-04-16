@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCustomMapStore } from "@/store/useCustomMapStore";
 
 export default function MapViz() {
@@ -6,10 +6,16 @@ export default function MapViz() {
 
   const { title, selectedPalette, legend } = useCustomMapStore();
 
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     const currentParams = JSON.stringify({ title, selectedPalette, legend });
 
-    const timeout = setTimeout(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
       const MapImageStored = sessionStorage.getItem("mapImage");
       const MapParamsStored = sessionStorage.getItem("mapImageParams");
 
@@ -23,17 +29,25 @@ export default function MapViz() {
         )
           .then((res) => res.blob())
           .then((imageBlob: Blob) => {
-            const imageObjectUrl = URL.createObjectURL(imageBlob);
-            setImageSrc(imageObjectUrl);
-            sessionStorage.setItem("mapImage", imageObjectUrl);
-            sessionStorage.setItem("mapImageParams", currentParams);
+            const reader = new FileReader();
+            reader.onload = () => {
+              const base64data = reader.result as string;
+              setImageSrc(base64data);
+              sessionStorage.setItem("mapImage", base64data);
+              sessionStorage.setItem("mapImageParams", currentParams);
+            };
+            reader.readAsDataURL(imageBlob);
           })
           .catch((error) =>
             console.error("Erreur lors de la récupération d'image", error)
           );
       }
-    }, 600);
-    return () => clearTimeout(timeout);
+    }, 1500);
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, [title, selectedPalette, legend]);
 
   return (
