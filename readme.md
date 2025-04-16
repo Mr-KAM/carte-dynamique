@@ -1,9 +1,8 @@
 🥳 UPDATE DE L'UI ET DE L'API EN BACKEND
 
-
+![Ui application](img/image.png)
 # 📄 Présentation
 
-![tableau de bord](img/map-image.png)
 
 ## Description du projet
 
@@ -13,9 +12,11 @@ Cette application offre une visualisation cartographique dynamique des données 
 
 - Importer des fichiers CSV contenant les données.
 - Tableau de bord interactif affichant des indicateurs clés.
-- Visualisation cartographique de la répartition des apprenants par région.
+- Visualisation cartographique des données par région.
 - Palettes de couleurs personnalisables pour les visualisations.
+- Affichage des données sur la carte avec des étiquettes.
 
+![tableau de bord](img/map-image.png)
 ## Technologies utilisées
 
 - **Frontend** : [Next.js](https://nextjs.org) pour le développement de l'interface utilisateur.
@@ -159,4 +160,13 @@ Pour accéder à la documentation automatique de ton API :
 
 # ➕ Amélioration et fonctionnalité a vénir
 
-A définir
+[ ] Ajouter une fonctionnalité de filtrage avancé sur la carte.
+[ ] Finalise le tableau de bord.
+[ ] Améliorer l'interface utilisateur pour une expérience plus fluide et responsible sur mobile et toutes tailles d'appareil
+[ ] Ajouter une fonctionnalité de téléchargement des données filtrées au format CSV ou Excel.
+[ ] Améliorer la gestion des données avec un modèle de base de données structuré
+[ ] Ajouter des options de connexion (authentification) avec profiles utilisateur
+[ ] Ajouter la création de projet avec des fichier spécifiques
+[ ] Ajouter une carte interactifs avec des fonctionnalités avancées (zoom, rotation, etc.)
+[ ] Ajouter une fonctionnalité de recherche pour trouver rapidement des données spécifiques sur la carte.
+[ ] Ajouter la possibilité de modifier les données en interner (Logique de crud)
