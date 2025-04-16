@@ -3,7 +3,7 @@
 
 # 📄 Présentation
 
-![tableau de bord](img/map.png)
+![tableau de bord](img/map-image.png)
 
 ## Description du projet
 
