@@ -158,8 +158,9 @@ Pour accéder à la documentation automatique de ton API :
 
 - **Redoc :** http://localhost:8000/redoc
 
-
 # ➕ Amélioration et fonctionnalité a vénir
+
+Les fonctionnalités suivantes sont à venir pour améliorer l'application :
 
 [ ] Ajouter une fonctionnalité de filtrage avancé sur la carte.
 [ ] Finalise le tableau de bord.
