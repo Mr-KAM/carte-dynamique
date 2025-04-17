@@ -1,5 +1,9 @@
-import React from "react";
+import { IvoireAI } from "@/components/ivoireai/IvoireAI";
 
 export default function page() {
-  return <div>page</div>;
+  return (
+    <div className="m-10">
+      <IvoireAI />
+    </div>
+  );
 }
