@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, Globe, Users } from "lucide-react";
+import { Menu, Globe, Users, ChartNoAxesCombined } from "lucide-react";
 
 export default function HomeHeader() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +28,8 @@ export default function HomeHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center mx-9 px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <Globe className="h-6 w-6" />
-          <span>StatViz CI</span>
+          <ChartNoAxesCombined className="h-6 w-6 text-primary" />
+          <span>StatViz CI 🇨🇮</span>
         </Link>
         <nav className="hidden md:flex ml-auto gap-6">
           {Liens.map((lien) => (

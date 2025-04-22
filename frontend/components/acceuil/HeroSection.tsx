@@ -1,7 +1,13 @@
 import { MinistrySelector } from "@/utils/MinistrySelector";
 import React from "react";
 import { Button } from "../ui/button";
-import { ArrowRight, BarChart3, Globe, PieChart } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  BotMessageSquare,
+  Globe,
+  PieChart,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function HeroSection() {
@@ -12,18 +18,17 @@ export default function HeroSection() {
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                Bienvenue sur la Plateforme de Visualisation des Statistiques
+                Visualisez les Statistiques des Ministères de Côte d'Ivoire : Bienvenue 👋🏾
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                Explorez les indicateurs clés des ministères de Côte
-                d&apos;Ivoire à travers des visualisations interactives et des
-                analyses détaillées.
+                Une plateforme intuitive pour explorer, analyser et visualiser
+                les indicateurs clés des ministères ivoiriens.
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <MinistrySelector />
               <Button variant="orange" asChild>
-                <Link href="/dashboard">
+                <Link href="/map">
                   Accéder au tableau de bord
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -43,12 +48,7 @@ export default function HeroSection() {
                   <Globe className="h-24 w-24 text-primary opacity-80" />
                 </div>
                 <div className="bg-background rounded-lg shadow-md p-4 flex items-center justify-center">
-                  <div className="h-24 w-full bg-muted rounded-md overflow-hidden">
-                    <div className="h-4 w-3/4 bg-primary/20 rounded-md m-2"></div>
-                    <div className="h-4 w-1/2 bg-primary/30 rounded-md m-2"></div>
-                    <div className="h-4 w-2/3 bg-primary/40 rounded-md m-2"></div>
-                    <div className="h-4 w-4/5 bg-primary/50 rounded-md m-2"></div>
-                  </div>
+                  <BotMessageSquare className="h-24 w-24 text-primary opacity-80" />
                 </div>
               </div>
             </div>

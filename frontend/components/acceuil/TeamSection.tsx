@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export function TeamSection() {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-      <div className="container px-4 md:px-6">
+      <div className="px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
@@ -34,21 +34,7 @@ export function TeamSection() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-center space-y-4">
-            <Avatar className="h-24 w-24">
-              <AvatarImage
-                src="/placeholder.svg?height=96&width=96"
-                alt="Diallo Karim"
-              />
-              <AvatarFallback>DK</AvatarFallback>
-            </Avatar>
-            <div className="space-y-2 text-center">
-              <h3 className="text-xl font-bold">Diallo Karim</h3>
-              <p className="text-sm text-muted-foreground">
-                Ingénieur en Données
-              </p>
-            </div>
-          </div>
+          
           <div className="flex flex-col items-center space-y-4">
             <Avatar className="h-24 w-24">
               <AvatarImage
