@@ -5,15 +5,15 @@ export default function Footer() {
     {
       id: 1,
       href: "/about",
-      label: "About",
+      label: "A propos",
     },
     {
-      id: 1,
+      id: 2,
       href: "/team",
-      label: "Equipe",
+      label: "Notre Equipe",
     },
     {
-      id: 1,
+      id: 3,
       href: "/contact",
       label: "Contacts",
     },
