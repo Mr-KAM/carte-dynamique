@@ -11,6 +11,13 @@ import {
 import Link from "next/link";
 
 export default function HeroSection() {
+  const iconData = [
+    { Icon: BarChart3, alt: "Bar Chart" },
+    { Icon: PieChart, alt: "Pie Chart" },
+    { Icon: Globe, alt: "Globe" },
+    { Icon: BotMessageSquare, alt: "Bot Message" },
+  ];
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 px-9">
       <div className="px-4 md:px-6">
@@ -18,7 +25,8 @@ export default function HeroSection() {
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                Visualisez les Statistiques des Ministères de Côte d'Ivoire : Bienvenue 👋🏾
+                Visualisez les Statistiques des Ministères de Côte d'Ivoire :
+                Bienvenue 👋🏾
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
                 Une plateforme intuitive pour explorer, analyser et visualiser
@@ -35,21 +43,21 @@ export default function HeroSection() {
               </Button>
             </div>
           </div>
+
           <div className="flex items-center justify-center">
             <div className="relative h-[350px] w-full overflow-hidden rounded-xl bg-muted/50 p-4 flex items-center justify-center">
               <div className="grid grid-cols-2 gap-4 w-full h-full">
-                <div className="bg-background rounded-lg shadow-md p-4 flex items-center justify-center">
-                  <BarChart3 className="h-24 w-24 text-primary opacity-80" />
-                </div>
-                <div className="bg-background rounded-lg shadow-md p-4 flex items-center justify-center">
-                  <PieChart className="h-24 w-24 text-primary opacity-80" />
-                </div>
-                <div className="bg-background rounded-lg shadow-md p-4 flex items-center justify-center">
-                  <Globe className="h-24 w-24 text-primary opacity-80" />
-                </div>
-                <div className="bg-background rounded-lg shadow-md p-4 flex items-center justify-center">
-                  <BotMessageSquare className="h-24 w-24 text-primary opacity-80" />
-                </div>
+                {iconData.map(({ Icon, alt }, index) => (
+                  <div
+                    key={index}
+                    className="bg-background rounded-lg shadow-md p-4 flex items-center justify-center"
+                  >
+                    <Icon
+                      className="h-24 w-24 text-primary opacity-80"
+                      aria-label={alt}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
