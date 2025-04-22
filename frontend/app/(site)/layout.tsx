@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
         <Header />
-        <main className="flex w-screen">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
