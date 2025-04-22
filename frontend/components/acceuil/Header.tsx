@@ -1,5 +1,5 @@
 import React from 'react'
-import LeftSection from './LeftSection'
+import LeftSection from './Footer'
 import RightSection from './RightSection'
 
 
