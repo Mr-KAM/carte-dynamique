@@ -11,12 +11,12 @@ export default function FeatureCard({
   description: string;
 }) {
   return (
-    <Card>
+    <Card className="pb-18">
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
           <Icon className="h-6 w-6 text-primary" />
         </div>
-        <div className="space-y-1">
+        <div className="space-y-1 text-xl font-bold">
           <CardTitle>{title}</CardTitle>
         </div>
       </CardHeader>

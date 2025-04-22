@@ -7,7 +7,7 @@ export default function FeaturesSection() {
       icon: BarChart3,
       title: "Tableaux de Bord",
       description:
-        "Visualisez les indicateurs clés de performance à travers des tableaux de bord interactifs et personnalisables.",
+        "Visualisez les indicateurs clés de performance à travers des tableaux de bord interactifs.",
     },
     {
       icon: Globe,
@@ -17,9 +17,9 @@ export default function FeaturesSection() {
     },
     {
       icon: BotMessageSquare,
-      title: "Assistant IA",
+      title: "Ivoire AI",
       description:
-        "Posez des questions en langage naturel et obtenez des analyses et des visualisations générées par notre assistant IA.",
+        "Posez des questions en langage naturel et obtenez des analyses et des visualisations générées par notre IA.",
     },
   ];
 
