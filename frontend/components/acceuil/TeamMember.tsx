@@ -10,7 +10,7 @@ export default function TeamMember({
 }: {
   name: string;
   role: string;
-  avatarSrc: string;
+  avatarSrc: string;    
   avatarAlt: string;
   avatarFallback: string;
 }) {

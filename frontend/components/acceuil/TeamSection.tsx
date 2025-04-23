@@ -2,25 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TeamMember from "./TeamMember";
+import teamMembers from "@/utils/teamMembers";
 
 export function TeamSection() {
-  const members = [
-    {
-      name: "Jaures MANOUAN",
-      role: "Co-fondateur | Developpeur, Economiste Statisticien, Ingénieur Agroalimentaire",
-      avatarSrc: "",
-      avatarAlt: "JM",
-      avatarFallback: "JM",
-    },
-    {
-      name: "Anicet KAMBOU",
-      role: "Co-fondateur | Developpeur, Ingénieur Eaux, Forêts et Environnement, Expert SIG",
-      avatarSrc: "",
-      avatarAlt: "AK",
-      avatarFallback: "AK",
-    },
-  ];
-
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
       <div className="px-4 md:px-6">
@@ -37,14 +21,14 @@ export function TeamSection() {
         </div>
 
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12 mt-8">
-          {members.map((member) => (
+          {teamMembers.map((member) => (
             <TeamMember
               key={member.name}
               name={member.name}
               role={member.role}
-              avatarSrc={member.avatarSrc}
-              avatarAlt={member.avatarAlt}
-              avatarFallback={member.avatarFallback}
+              avatarSrc={member.photo}
+              avatarAlt={member.name}
+              avatarFallback={member.name}
             />
           ))}
         </div>
