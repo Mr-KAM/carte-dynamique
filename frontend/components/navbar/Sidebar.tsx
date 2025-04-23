@@ -26,7 +26,7 @@ const navItems = [
     id: "BarChart3",
     title: "Tableau de Bord",
     icon: BarChart3,
-    path: "/",
+    path: "/statistiques",
   },
   {
     id: "FileUp",
@@ -63,20 +63,22 @@ export default function AppSidebar() {
         <SidebarHeader className="cursor-pointer">
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild>
-                <div className="flex items-center">
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                    <ChartNoAxesCombined className="size-4" />
+              <Link href={"/"}>
+                <SidebarMenuButton size="lg" asChild>
+                  <div className="flex items-center">
+                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                      <ChartNoAxesCombined className="size-4" />
+                    </div>
+                    <div className="flex flex-col gap-0.5 leading-none ml-2">
+                      <span className="font-semibold">StatViz CI 🇨🇮</span>
+                      {/* TODO: Rendre le nom dynamique en fonction du ministère sélectionnée*/}
+                      <span className="text-xs font-medium text-muted-foreground">
+                        METFPA
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-0.5 leading-none ml-2">
-                    <span className="font-semibold">StatViz CI 🇨🇮</span>
-                    {/* TODO: Rendre le nom dynamique en fonction du ministère sélectionnée*/}
-                    <span className="text-xs font-medium text-muted-foreground">
-                      METFPA
-                    </span>
-                  </div>
-                </div>
-              </SidebarMenuButton>
+                </SidebarMenuButton>
+              </Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>

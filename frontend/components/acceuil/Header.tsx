@@ -9,7 +9,7 @@ export default function HomeHeader() {
   const Liens = [
     {
       id: 1,
-      href: "/about",
+      href: "/",
       label: "Accueil",
     },
     {

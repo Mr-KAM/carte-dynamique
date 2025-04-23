@@ -36,7 +36,7 @@ export default function HeroSection() {
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
               <MinistrySelector />
               <Button variant="orange" asChild>
-                <Link href="/map">
+                <Link href="/statistiques">
                   Accéder au tableau de bord
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
