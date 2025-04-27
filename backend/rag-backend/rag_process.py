@@ -29,7 +29,7 @@ def rag_process(pdf_path: str):
 
     QA_PROMPT = PromptTemplate.from_template(template)
 
-    llm = ChatOllama(model="mistral:7b-instruct", temperature=0)
+    llm = ChatOllama(model="qwen2.5:3b", temperature=0)
 
     qa_chain = RetrievalQA.from_chain_type(
         llm = llm,

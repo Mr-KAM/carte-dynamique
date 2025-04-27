@@ -15,8 +15,14 @@ app.add_middleware(
 
 pdf_path = "/Users/macbookair/Desktop/DPSI/Annuaires Statistiques METFPA/Annuaire 2024/Annuaire Stat 2023-2024_v14_21042025.pdf"
 qa_chain = rag_process(pdf_path)
+
+def stream_response(text):
+    for word in text.split():
+        yield word + " "
+        import time
+        time.sleep(0.05)
  
 @app.post("/chat")
 async def ask_qestion(question: str= Body(...)):
     response = qa_chain.run(question)
-    return {"Response": response }
+    return StreamingResponse(stream_response(response), media_type="text/plain")

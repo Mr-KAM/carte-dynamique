@@ -5,7 +5,7 @@ import { Send } from "lucide-react";
 import { useAIFunctionsStore } from "@/store/useAIFunctionsStore";
 
 export default function SendQuestion() {
-  const { input, setInput, handleKeyDown, isLoading, handleSendMessage } =
+  const { input, setInput, handleKeyDown, isLoading, handleSendQuestion } =
     useAIFunctionsStore();
 
   return (
@@ -20,7 +20,7 @@ export default function SendQuestion() {
           className="flex-1"
         />
         <Button
-          onClick={handleSendMessage}
+          onClick={handleSendQuestion}
           disabled={!input.trim() || isLoading}
         >
           <Send className="h-4 w-4" />

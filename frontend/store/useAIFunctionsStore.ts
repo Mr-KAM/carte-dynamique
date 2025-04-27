@@ -10,12 +10,14 @@ type AIFunctionsStore = {
   messages: Message[];
   input: string;
   isLoading: boolean;
-  setMessages: (messages: Message[]) => void;
+  setMessages: (
+    messages: Message[] | ((prevMessages: Message[]) => Message[])
+  ) => void;
   addMessage: (message: Message) => void;
   setInput: (input: string) => void;
   setIsLoading: (isLoading: boolean) => void;
   handleSuggestedQuery: (query: string) => void;
-  handleSendMessage: () => void;
+  handleSendQuestion: () => void;
   handleKeyDown: (e: React.KeyboardEvent) => void;
 };
 
@@ -31,8 +33,16 @@ export const useAIFunctionsStore = create<AIFunctionsStore>((set, get) => ({
   input: "",
   isLoading: false,
 
-  setMessages: (messages) => set({ messages }),
-  addMessage: (message) => set((state) => ({ messages: [...state.messages, message] })),
+  setMessages: (messagesOrUpdater) =>
+    set((state) => ({
+      messages:
+        typeof messagesOrUpdater === "function"
+          ? messagesOrUpdater(state.messages)
+          : messagesOrUpdater,
+    })),
+
+  addMessage: (message) =>
+    set((state) => ({ messages: [...state.messages, message] })),
   setInput: (input) => set({ input }),
   setIsLoading: (isLoading) => set({ isLoading }),
 
@@ -40,8 +50,9 @@ export const useAIFunctionsStore = create<AIFunctionsStore>((set, get) => ({
     set({ input: query });
   },
 
-  handleSendMessage: () => {
-    const { input, messages } = get();
+  handleSendQuestion: async () => {
+    const { input, messages, addMessage, setMessages, setInput, setIsLoading } =
+      get();
     if (!input.trim()) return;
 
     const userMessage: Message = {
@@ -50,18 +61,55 @@ export const useAIFunctionsStore = create<AIFunctionsStore>((set, get) => ({
       timestamp: new Date(),
     };
 
-    set({
-      messages: [...messages, userMessage],
-      input: "",
-      isLoading: true,
-    });
+    addMessage(userMessage);
+    setInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:8000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      });
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let assistantMessage: Message = {
+        role: "assistant",
+        content: "",
+        timestamp: new Date(),
+      };
+
+      addMessage(assistantMessage);
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+
+          setMessages((currentMessages) => {
+            const updatedMessages = [...currentMessages];
+            updatedMessages[updatedMessages.length - 1].content += chunk;
+            return updatedMessages;
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Erreur lors du streaming du message :", error);
+    } finally {
+      setIsLoading(false);
+    }
   },
 
   handleKeyDown: (e) => {
-    const { handleSendMessage } = get();
+    const { handleSendQuestion } = get();
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSendMessage();
+      handleSendQuestion();
     }
   },
 }));
