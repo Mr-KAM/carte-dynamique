@@ -28,7 +28,7 @@ export default function ChatWithAI() {
 
   return (
     <TabsContent value="chat" className="flex-1 flex flex-col p-0 m-0">
-      <ScrollArea className="flex-1 p-4">
+      <ScrollArea className="flex p-4">
         <div className="space-y-4 mb-4">
           {messages.map((message, index) => (
             <div

@@ -16,7 +16,7 @@ export function IvoireAI() {
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 cursor-pointer"
               >
                 <tab.icon className="h-4 w-4" />
                 <span>{tab.label}</span>
