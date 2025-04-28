@@ -1,5 +1,6 @@
 "use client";
 import CustomMap from "@/components/mapsViz/CustomMap";
+import EmptyMap from "@/components/mapsViz/EmptyMap";
 import MapViz from "@/components/mapsViz/MapViz";
 import { Button } from "@/components/ui/button";
 import useCSVUploader from "@/hooks/useCSVUploader";
@@ -32,9 +33,7 @@ export default function Map() {
             </div>
           </div>
         ) : (
-          <span className="h-10/12 bg-muted/50 rounded-lg border flex items-center justify-center">
-            Carte des indicateurs
-          </span>
+          <EmptyMap />
         )}
         <Button
           variant={"orange"}
